@@ -12,12 +12,10 @@ class Solution(object):
         if not head or not head.next:
             return head
         
-        prev=None
-        curr=head
-        while curr:
-            face=curr.next
-            curr.next=prev
-            prev=curr
-            curr=face
+        newHead=self.reverseList(head.next)
+
+        head.next.next=head
+        head.next=None
+
+        return newHead
         
-        return prev
