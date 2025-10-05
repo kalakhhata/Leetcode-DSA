@@ -13,18 +13,31 @@ class Solution(object):
         :type head: Node
         :rtype: Node
         """
-        hash = {None:None}
         curr=head
+        while curr:
+            copy=Node(curr.val)
+            copy.next=curr.next
+            curr.next=copy
+            curr=curr.next.next
         
-        while curr:
-            hash[curr]=Node(curr.val)
-            curr=curr.next
-            
-
         curr=head
         while curr:
-            copyNode=hash[curr]
-            copyNode.next=hash[curr.next]
-            copyNode.random=hash[curr.random]
+            if curr.random:
+                curr.next.random=curr.random.next
+            else:
+                curr.next.random=curr.random
+            curr=curr.next.next
+        
+        curr=head
+        N=Node(-1)
+        newN=N
+        while curr:
+            newN.next=curr.next
+            newN=newN.next
+            curr.next=newN.next
             curr=curr.next
-        return hash[head]
+        return N.next
+
+
+
+        
