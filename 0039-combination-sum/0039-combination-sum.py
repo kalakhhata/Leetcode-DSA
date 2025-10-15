@@ -15,7 +15,6 @@ class Solution(object):
             if candidates[i]<=target:
                 ans.append(candidates[i])
                 findCombination(i,target-candidates[i])
-
                 ans.pop()
             findCombination(i+1,target)
 
