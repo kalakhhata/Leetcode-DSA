@@ -5,17 +5,15 @@ class Solution(object):
         :rtype: List[str]
         """
         res=[]
-        def generate(open,close,s):
-            if open==0 and close==0:
-                res.append(s)
+        def getParentheses(l,r,st):
+            #base-case
+            if l==r==0:
+                res.append(st)
                 return
-            
-            if open>0:
-                generate(open-1,close,s+'(')
-            
-            if close>open:
-                generate(open,close-1,s+')')
+            if l>0:
+                getParentheses(l-1,r,st+'(')
+            if r>0 and r>l:
+                getParentheses(l,r-1,st+')')
         
-        generate(n,n,'')
+        getParentheses(n,n,'')
         return res
-        
