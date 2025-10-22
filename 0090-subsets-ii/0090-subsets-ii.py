@@ -4,19 +4,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        ans=set()
-        temp=[]
+        res=[]
+        ans=[]
         nums.sort()
-        def getUSubset(i,temp):
-            if i==len(nums):
-                ans.add(tuple(temp[:]))
-                return
+        def getSubset(start):
+          
+            res.append(ans[:])
             
-            temp.append(nums[i])
-            getUSubset(i+1,temp)
-            temp.pop()
-            getUSubset(i+1,temp)
+            for i in range(start,len(nums)):
+                if i>start and nums[i]==nums[i-1]:
+                    continue
+                ans.append(nums[i])
+                getSubset(i+1)
+                ans.pop()
         
-        getUSubset(0,temp)
-        return [list(t) for t in ans]
-        
+        getSubset(0)
+        return res
