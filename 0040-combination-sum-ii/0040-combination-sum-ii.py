@@ -6,23 +6,26 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         res=[]
-        sub=[]
+        ans=[]
         candidates.sort()
-        def findSubset(start,target):
+        def findC(idx,target):
             if target<0:
                 return
             if target==0:
-                res.append(sub[:])
+                res.append(ans[:])
                 return
             
-            for i in range(start,len(candidates)):
-                if i>start and candidates[i]==candidates[i-1]:
+            for i in range(idx,len(candidates)):
+                if i>idx and candidates[i]==candidates[i-1]:
                     continue
-                if candidates[i]>target:
+                if target<candidates[i]:
                     break
-                sub.append(candidates[i])
-                findSubset(i+1,target-candidates[i])
-                sub.pop()
-        findSubset(0,target)
+                
+                ans.append(candidates[i])
+                findC(i+1,target-candidates[i])
+                ans.pop()
+        
+        findC(0,target)
         return res
+
         
