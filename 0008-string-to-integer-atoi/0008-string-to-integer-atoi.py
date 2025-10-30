@@ -4,30 +4,31 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        MAX_INT=2**31-1
-        MIN_INT=-2**31
         s=s.lstrip()
         if not s:
             return 0
-        
         sign=1
         if s[0] in ['+','-']:
             if s[0]=='-':
                 sign=-1
             s=s[1:]
-        num=self.helper(0,0,s)
-        if num*sign>MAX_INT:
-            return MAX_INT
-        elif num*sign<MIN_INT:
-            return MIN_INT
-        return num*sign
-    
-    def helper(self,num,i,s):
+        MIN=-2**31
+        MAX=2**(31)-1
+        num=self.getDigit(s,0,0)
+        if sign==-1:
+            num=num*-1
+        if num<MIN:
+            return MIN
+        if num>MAX:
+            return MAX
         
+        return num
 
+    def getDigit(self,s,i,n):
         if i>=len(s) or not s[i].isdigit():
-            return num
+            return n
         
-        num=num*10+int(s[i])
+        n=n*10+int(s[i])
+        return self.getDigit(s,i+1,n)
 
-        return self.helper(num,i+1,s)
+         
