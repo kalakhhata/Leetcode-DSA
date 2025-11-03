@@ -4,24 +4,16 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        res=[]
         subset=[]
-
-        def getSubset(i):
-            #base-case
-            if i>=len(nums):
-                res.append(subset[:])
-                return
-            
-            #left leaf
-            subset.append(nums[i])
-            getSubset(i+1) 
-            
-            #right leaf
-            subset.pop()
-            getSubset(i+1)
         
-        getSubset(0)
-        return res
+        for mask in range(1<<len(nums)):
+            ans=[]
+            for i in range(len(nums)):
+                if mask & (1<<i):
+                    ans.append(nums[i])
+            subset.append(ans)
+        
+        return subset
+        
         
         
