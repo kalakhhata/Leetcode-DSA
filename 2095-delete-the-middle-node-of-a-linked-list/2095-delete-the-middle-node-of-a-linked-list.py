@@ -9,21 +9,19 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
+        if not head or not head.next:
+            return None
         curr=head
         cnt=0
         while curr:
-            cnt+=1
             curr=curr.next
-
-        m=(cnt//2)
-        if m==0:
-            return None
+            cnt+=1
+        pivot=cnt//2
         curr=head
-        for i in range(cnt):
-            if i==m-1:
-                break
+
+        for i in range(pivot-1):
             curr=curr.next
         
-        curr.next = curr.next.next if curr.next else None
+        curr.next=curr.next.next if curr.next else None
 
         return head
