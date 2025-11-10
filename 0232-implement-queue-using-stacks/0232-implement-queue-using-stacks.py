@@ -10,28 +10,24 @@ class MyQueue(object):
         :rtype: None
         """
         self.stack_in.append(x)
-        
 
     def pop(self):
         """
         :rtype: int
         """
-        if not self.stack_out:
-            while self.stack_in:
+        if len(self.stack_out)==0:
+            while len(self.stack_in)!=0:
                 self.stack_out.append(self.stack_in.pop())
-        
         return self.stack_out.pop()
-
         
 
     def peek(self):
         """
         :rtype: int
         """
-        if not self.stack_out:
-            while self.stack_in:
+        if len(self.stack_out)==0:
+            while len(self.stack_in)!=0:
                 self.stack_out.append(self.stack_in.pop())
-        
         return self.stack_out[-1]
         
 
