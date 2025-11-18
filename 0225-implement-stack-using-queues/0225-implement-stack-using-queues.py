@@ -19,9 +19,10 @@ class MyStack(object):
         while len(self.q1)>1:
             self.q2.append(self.q1.popleft())
         
-        popVal=self.q1.popleft()
+        popValue=self.q1.popleft()
         self.q1,self.q2=self.q2,self.q1
-        return popVal
+
+        return popValue
         
 
     def top(self):
@@ -31,11 +32,10 @@ class MyStack(object):
         while len(self.q1)>1:
             self.q2.append(self.q1.popleft())
         
-        popVal=self.q1.popleft()
-        self.q2.append(popVal)
+        topVal=self.q1[-1]
+        self.q2.append(topVal)
         self.q1,self.q2=self.q2,self.q1
-        return popVal
-
+        return topVal
         
 
     def empty(self):
