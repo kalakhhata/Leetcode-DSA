@@ -5,16 +5,13 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-        ng=defaultdict(lambda : -1)
+        n=len(nums2)
         stack=[]
+        nge=defaultdict(lambda:-1)
 
         for num in nums2:
             while stack and stack[-1]<num:
-                ng[stack.pop()]=num
+                nge[stack.pop()]=num
             stack.append(num)
         
-        return [ng[num] for num in nums1]
-        
-
-
-        
+        return [nge[num] for num in nums1]
