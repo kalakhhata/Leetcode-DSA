@@ -4,23 +4,21 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        if not height:
-            return 0
-        l,r=0,len(height)-1
-        lMax=height[l]
-        rMax=height[r]
+        l=0
+        r=len(height)-1
+        lmax=height[l]
+        rmax=height[r]
         res=0
-        
+
         while l<r:
             if height[l]<height[r]:
                 l+=1
-                lMax=max(lMax,height[l])
-                res+=lMax-height[l]
+                lmax=max(lmax,height[l])
+                res+=lmax-height[l]
             else:
                 r-=1
-                rMax=max(rMax,height[r])
-                res+=rMax-height[r]
+                rmax=max(rmax,height[r])
+                res+=rmax-height[r]
         
         return res
-
         
