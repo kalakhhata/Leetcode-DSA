@@ -14,7 +14,6 @@ class Solution(object):
         
         slow=head
         fast=head.next
-
         while fast and fast.next:
             slow=slow.next
             fast=fast.next.next
@@ -23,11 +22,11 @@ class Solution(object):
         left=self.sortList(head)
         right=self.sortList(mid)
 
-        return self.merge(left,right)
+        return self.getSorted(left,right)
     
-    def merge(self,left,right):
-        dummyN=ListNode(-1)
-        temp=dummyN
+    def getSorted(self,left,right):
+        dummyNode=ListNode(-1)
+        temp=dummyNode
         while left and right:
             if left.val<=right.val:
                 temp.next=left
@@ -37,4 +36,7 @@ class Solution(object):
                 right=right.next
             temp=temp.next
         temp.next=left if left else right
-        return dummyN.next
+        return dummyNode.next
+
+
+        
