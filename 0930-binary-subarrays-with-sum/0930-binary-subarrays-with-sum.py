@@ -5,16 +5,21 @@ class Solution(object):
         :type goal: int
         :rtype: int
         """
-        count={0:1}
-        cum_sum=0
-        count_subarr=0
-
-        for num in nums:
-            cum_sum+=num
-
-            if cum_sum-goal in count:
-                count_subarr+=count[cum_sum-goal]
-            count[cum_sum]=count.get(cum_sum,0)+1
+        def atMost(k):
+            if k<0:
+                return 0
+            
+            count=0
+            l=0
+            cumsum=0
+            for r in range(len(nums)):
+                cumsum+=nums[r]
+                
+                while cumsum>k:
+                    cumsum-=nums[l]
+                    l+=1
+                count+=(r-l)+1
+            
+            return count
         
-        return count_subarr
-        
+        return atMost(goal)-atMost(goal-1)
