@@ -7,11 +7,13 @@ class Solution(object):
         """
         freq=[0]*26
         left=0
-        ans=0
         max_freq=0
+        ans=0
+
         for right in range(len(s)):
             freq[ord(s[right])-ord('A')]+=1
             max_freq=max(max_freq,freq[ord(s[right])-ord('A')])
+
 
             if (right-left+1)-max_freq>k:
                 freq[ord(s[left])-ord('A')]-=1
@@ -20,6 +22,4 @@ class Solution(object):
             ans=max(ans,right-left+1)
         
         return ans
-                
-
         
