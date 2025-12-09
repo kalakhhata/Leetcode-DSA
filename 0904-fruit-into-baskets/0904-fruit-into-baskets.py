@@ -5,18 +5,20 @@ class Solution(object):
         :rtype: int
         """
         left=0
+        basket=0
         ans=0
-        fruit_count=defaultdict(int)
+        basket=defaultdict(int)
 
         for right in range(len(fruits)):
-            fruit_count[fruits[right]]+=1
+            basket[fruits[right]]+=1
 
-            while len(fruit_count)>2:
-                fruit_count[fruits[left]]-=1
-                if fruit_count[fruits[left]]==0:
-                    del fruit_count[fruits[left]]
+            while len(basket)>2:
+                basket[fruits[left]]-=1
+                if basket[fruits[left]]==0:
+                    del basket[fruits[left]]
                 left+=1
-
+                
             ans=max(ans,right-left+1)
         
         return ans
+
