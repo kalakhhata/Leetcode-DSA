@@ -8,13 +8,12 @@ class Solution(object):
         lsum=sum(cardPoints[:k])
         rsum=0
         maxSum=lsum
-        lindex=len(cardPoints)-1
+        rindex=len(cardPoints)-1
+
         for i in range(k-1,-1,-1):
             lsum-=cardPoints[i]
-            rsum+=cardPoints[lindex]
-            lindex-=1
-            maxSum=max(maxSum,lsum+rsum)
+            rsum+=cardPoints[rindex]
+            rindex-=1
+            maxSum=max(maxSum,rsum+lsum)
         
         return maxSum
-
-        
