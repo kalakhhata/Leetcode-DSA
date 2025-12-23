@@ -5,20 +5,17 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        left=0
-        ans=0
-        limit=0
+        l=0
+        cnt=0
+        temp=0
 
-        for right in range(len(nums)):
-            if nums[right]==0:
-                limit+=1
+        for r in range(len(nums)):
+            if nums[r]!=1:
+                temp+=1
             
-            while limit>k:
-                if nums[left]==0:
-                    limit-=1
-                left+=1
-            ans=max(ans,right-left+1)
-        
-        return ans
-
-        
+            while temp>k:
+                if nums[l]==0:
+                    temp-=1
+                l+=1
+            cnt=max(cnt,r-l+1)
+        return cnt
