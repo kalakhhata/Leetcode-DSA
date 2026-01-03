@@ -4,14 +4,14 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        lo=0 #takes care of min open parenthesis
-        hi=0 #takes care of max open parenthesis
+        lo=0
+        hi=0
 
-        for pt in s:
-            if pt=='(':
+        for ch in s:
+            if ch=='(':
                 lo+=1
                 hi+=1
-            elif pt==')':
+            elif ch==')':
                 lo=max(lo-1,0)
                 hi-=1
             else:
@@ -21,6 +21,3 @@ class Solution(object):
                 return False
         
         return lo==0
-
-
-        
