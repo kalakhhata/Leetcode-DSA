@@ -10,14 +10,24 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: List[int]
         """
+        if not root:
+            return []
+        
+        s1=[root]
+        s2=[]
         res=[]
-        self.postOrder(root,res)
+
+        while s1:
+            node=s1.pop()
+            s2.append(node.val)
+
+            if node.left:
+                s1.append(node.left)
+            if node.right:
+                s1.append(node.right)
+        
+        while s2:
+            res.append(s2.pop())
+        
         return res
-    
-    def postOrder(self,root,res):
-        if root:
-            self.postOrder(root.left,res)
-            self.postOrder(root.right,res)
-            res.append(root.val)
-    
-    
+        
