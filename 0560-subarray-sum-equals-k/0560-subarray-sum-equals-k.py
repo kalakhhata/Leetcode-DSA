@@ -6,15 +6,16 @@ class Solution(object):
         :rtype: int
         """
         cnt=0
-        sum=0
+        s=0
+
         prev=defaultdict(int)
-        prev[0]=1 # for subarrays that starting for index 0
+        prev[0]=1
+
         for num in nums:
-            sum+=num
-            rem=sum-k
+            s+=num
+            rem=s-k
             if rem in prev:
                 cnt+=prev[rem]
-            prev[sum]+=1
-        
+            prev[s]+=1
         return cnt
-        
+
