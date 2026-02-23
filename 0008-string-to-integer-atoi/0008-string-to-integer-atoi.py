@@ -4,31 +4,43 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+        #max and min
+        IMAX=2**31-1
+        IMIN=-2**31
+        num=0
+        #takes care of the whitespace
         s=s.lstrip()
         if not s:
             return 0
+        
+        #takes care of sign or unsign
         sign=1
         if s[0] in ['+','-']:
             if s[0]=='-':
                 sign=-1
             s=s[1:]
-        MIN=-2**31
-        MAX=2**(31)-1
-        num=self.getDigit(s,0,0)
-        if sign==-1:
-            num=num*-1
-        if num<MIN:
-            return MIN
-        if num>MAX:
-            return MAX
         
-        return num
+        #now it Read the integer by skipping leading zeros until a non-digit character is encountered
+        n=self.getNum(s,0,0)
+        
+        #sign coversion
+        n*=sign
+        if n>IMAX:
+            return IMAX
+        if n<IMIN:
+            return IMIN
+        
+        return n
+    
+    def getNum(self,s,i,num):
 
-    def getDigit(self,s,i,n):
+        #base-case
         if i>=len(s) or not s[i].isdigit():
-            return n
+            return num
         
-        n=n*10+int(s[i])
-        return self.getDigit(s,i+1,n)
+        num=(num*10) + int(s[i])
+        return self.getNum(s,i+1,num)
 
-         
+
+
+        
