@@ -11,14 +11,17 @@ class Solution(object):
         """
         if not head or not head.next:
             return head
+        odd=head
+        even=head.next
+        temp=head.next
+
+        while even and even.next:
+            odd.next=even.next
+            odd=odd.next
+            even.next=odd.next
+            even=even.next
         
-        slow=head
-        fast=head.next
-        rem=head.next
-        while fast and fast.next:
-            slow.next=fast.next
-            slow=slow.next
-            fast.next=slow.next
-            fast=fast.next
-        slow.next=rem
+        odd.next=temp
         return head
+
+        
