@@ -9,16 +9,18 @@ class Solution:
 
         if token==color:
             return image
+        def dfs(i,j,token):
+            if i<0 or i>=row or j<0 or j>=col or image[i][j]!=token:
+                return 
+            
+            image[i][j]=color
+            dfs(i+1,j,token)
+            dfs(i-1,j,token)
+            dfs(i,j+1,token)
+            dfs(i,j-1,token)
         
-        while q:
-            r,c=q.popleft()
-            image[r][c]=color
-
-            for i,j in dire:
-                rr=r+i
-                cc=c+j
-                if 0<=rr<row and 0<=cc<col and image[rr][cc]==token:
-                    q.append((rr,cc))
+        
+        dfs(sr,sc,token)
         
         return image
 
