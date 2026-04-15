@@ -4,15 +4,16 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        left=0
+        l=0
         ans=0
-        temp=set()
+        bucket=set()
 
-        for right in range(len(s)):
-            while s[right] in temp:
-                temp.remove(s[left])
-                left+=1
-            temp.add(s[right])
-            ans=max(ans,right-left+1)
-        return ans
+        for r in range(len(s)):
+            while s[r] in bucket:
+                bucket.remove(s[l])
+                l+=1
             
+            ans=max(ans,r-l+1)
+            bucket.add(s[r])
+        
+        return ans
