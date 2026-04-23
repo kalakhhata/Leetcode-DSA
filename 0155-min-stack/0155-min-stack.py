@@ -2,6 +2,7 @@ class MinStack(object):
 
     def __init__(self):
         self.st=[]
+        
 
     def push(self, val):
         """
@@ -18,7 +19,7 @@ class MinStack(object):
         """
         :rtype: None
         """
-        return self.st.pop()
+        self.st.pop()
         
 
     def top(self):
