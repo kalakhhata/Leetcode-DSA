@@ -7,11 +7,12 @@ class Solution(object):
         st=[]
         ans=[0]*len(temperatures)
 
-        for curr_day,curr_temp in enumerate(temperatures):
-            while st and temperatures[st[-1]]<curr_temp:
-                prev_day=st.pop()
-                ans[prev_day]=curr_day-prev_day
-            st.append(curr_day)
+        for i,val in enumerate(temperatures):
+            while st and temperatures[st[-1]]<val:
+                idx=st.pop()
+                ans[idx]=i-idx
+            st.append(i)
         
         return ans
+
         
