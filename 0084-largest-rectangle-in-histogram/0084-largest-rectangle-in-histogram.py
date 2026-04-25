@@ -4,22 +4,25 @@ class Solution(object):
         :type heights: List[int]
         :rtype: int
         """
-        stack=[]
         maxEl=0
+        st=[]
         n=len(heights)
 
         for i in range(n):
-            while stack and heights[stack[-1]]>heights[i]:
-                el=heights[stack.pop()]
+            while st and heights[st[-1]]>heights[i]:
+                el=heights[st.pop()]
                 nle=i
-                ple=stack[-1] if stack else -1
+                ple=st[-1] if st else -1
                 maxEl=max(maxEl,el*(nle-ple-1))
-            stack.append(i)
+            st.append(i)
         
-        while stack:
+        while st:
+            el=heights[st.pop()]
             nle=n
-            el=heights[stack.pop()]
-            ple=stack[-1] if stack else -1
+            ple=st[-1] if st else -1
             maxEl=max(maxEl,el*(nle-ple-1))
         
         return maxEl
+
+            
+                
