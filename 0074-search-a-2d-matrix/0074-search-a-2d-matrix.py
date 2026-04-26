@@ -5,23 +5,20 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        low=0
-        high=(len(matrix)*len(matrix[0]))-1
-
-        while low<=high:
-            mid=low+(high-low)//2
-            temp=self.numFound(matrix,mid)
-            if temp==target:
+        def getTarget(idx):
+            low=0
+            high=len(matrix[idx])-1
+            while low<=high:
+                mid=(low+high)//2
+                if matrix[idx][mid]>target:
+                    high=mid-1
+                elif matrix[idx][mid]<target:
+                    low=mid+1
+                else:
+                    return True
+            return False
+        for i in range(len(matrix)):
+            if getTarget(i):
                 return True
-            elif temp>target:
-                high=mid-1
-            else:
-                low=mid+1
-        
         return False
-    
-    def numFound(self,matrix,mid):
-        row=mid//len(matrix[0])
-        col=mid%len(matrix[0])
-        return matrix[row][col]
         
