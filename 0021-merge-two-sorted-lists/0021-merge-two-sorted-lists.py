@@ -19,15 +19,7 @@ class Solution:
                 dummy=dummy.next
                 list2=list2.next
         
-        while list1:
-            dummy.next=ListNode(list1.val)
-            dummy=dummy.next
-            list1=list1.next
-        
-        while list2:
-            dummy.next=ListNode(list2.val)
-            dummy=dummy.next
-            list2=list2.next
+        dummy.next = list1 or list2
         
         return ans.next
 
