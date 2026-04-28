@@ -1,26 +1,29 @@
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        if len(nums1) > len(nums2):
-            nums1, nums2 = nums2, nums1  
-        x, y = len(nums1), len(nums2)
-        low, high = 0, x
-        
-        while low <= high:
-            partitionX = (low + high) // 2
-            partitionY = (x + y + 1) // 2 - partitionX
-            
-            maxLeftX = float('-inf') if partitionX == 0 else nums1[partitionX - 1]
-            minRightX = float('inf') if partitionX == x else nums1[partitionX]
-            
-            maxLeftY = float('-inf') if partitionY == 0 else nums2[partitionY - 1]
-            minRightY = float('inf') if partitionY == y else nums2[partitionY]
-            
-            if maxLeftX <= minRightY and maxLeftY <= minRightX:
-                if (x + y) % 2 == 0:
-                    return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2
+        if len(nums1)>len(nums2):
+            nums1,nums2=nums2,nums1
+        x,y=len(nums1),len(nums2)
+        low=0
+        high=x
+
+        while low<=high:
+            par1=(low+high)//2
+            par2=((x+y+1)//2)-par1
+
+            leftX=float('-inf') if par1==0 else nums1[par1-1]
+            leftY=float('-inf') if par2==0 else nums2[par2-1]
+
+            rightX=float('inf') if par1==x else nums1[par1]
+            rightY=float('inf') if par2==y else nums2[par2]
+
+            if leftX<=rightY and leftY<=rightX:
+                if (x+y)%2==0:
+                    return (max(leftX,leftY)+min(rightX,rightY))/2
                 else:
-                    return max(maxLeftX, maxLeftY)
-            elif maxLeftX > minRightY:
-                high = partitionX - 1
+                    return max(leftX,leftY)
+            elif leftX>rightY:
+                high=par1-1
             else:
-                low = partitionX + 1
+                low=par1+1
+
+        
