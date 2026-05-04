@@ -1,26 +1,22 @@
 # Definition for singly-linked list.
-# class ListNode(object):
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def reverseKGroup(self, head, k):
-        """
-        :type head: Optional[ListNode]
-        :type k: int
-        :rtype: Optional[ListNode]
-        """
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+
+        curr=head
         cnt=0
-        temp=head
-        while temp and cnt<k:
-            temp=temp.next
+
+        while curr and cnt<k:
+            curr=curr.next
             cnt+=1
-        
         if cnt<k:
             return head
         
-        prev=None
         curr=head
+        prev=None
         for _ in range(k):
             face=curr.next
             curr.next=prev
@@ -30,4 +26,7 @@ class Solution(object):
         head.next=self.reverseKGroup(curr,k)
 
         return prev
+        
+
+
         
