@@ -16,10 +16,10 @@ class Solution:
         
         while minheap:
             val,idx,node=heapq.heappop(minheap)
-            dummy.next=ListNode(val)
+            dummy.next=node
             dummy=dummy.next
             if node.next:
-                heapq.heappush(minheap,(node.next.val,idx+1,node.next))
+                heapq.heappush(minheap,(node.next.val,idx,node.next))
         
         return ans.next
 
