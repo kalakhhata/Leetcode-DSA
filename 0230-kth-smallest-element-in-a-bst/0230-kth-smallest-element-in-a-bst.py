@@ -10,14 +10,15 @@ class Solution:
         st=[]
         curr=root
         ans=[]
+        cnt=0
         while curr or st:
             while curr:
                 st.append(curr)
                 curr=curr.left
             curr=st.pop()
-            ans.append(curr.val)
-            if len(ans)==k:
-                return ans[k-1]
+            cnt+=1
+            if cnt==k:
+                return curr.val
             curr=curr.right
     
             
