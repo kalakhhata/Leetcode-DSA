@@ -14,16 +14,18 @@ class Codec:
         :rtype: str
         """
         res=[]
-        def preorder(root):
-            if not root:
+        def preOrder(node):
+            if not node:
                 res.append('N')
-            else:
-                res.append(str(root.val))
-                preorder(root.left)
-                preorder(root.right)
+                return
+            
+            res.append(str(node.val))
+            preOrder(node.left)
+            preOrder(node.right)
         
-        preorder(root)
+        preOrder(root)
         return ','.join(res)
+            
         
 
     def deserialize(self, data):
@@ -36,14 +38,15 @@ class Codec:
         self.i=0
 
         def construct():
-            nodeVal=nodeValues[self.i]
+            val=nodeValues[self.i]
             self.i+=1
-            if nodeVal=='N':
+            if val=='N':
                 return None
-            root=TreeNode(int(nodeVal))
-            root.left=construct()
-            root.right=construct()
-            return root
+            
+            node=TreeNode(int(val))
+            node.left=construct()
+            node.right=construct()
+            return node
         
         return construct()
         
