@@ -1,35 +1,39 @@
 import heapq
-
-class MedianFinder(object):
+class MedianFinder:
 
     def __init__(self):
-        self.left = []   # max heap (negated values)
-        self.right = []  # min heap
+        self.left_heap=[]
+        self.right_heap=[]
+        
 
-    def addNum(self, num):
-        # Step 1: push into correct heap
-        if not self.left or num <= -self.left[0]:
-            heapq.heappush(self.left, -num)
-        else:
-            heapq.heappush(self.right, num)
+    def addNum(self, num: int) -> None:
+        heapq.heappush(self.left_heap,-num)
 
-        # Step 2: rebalance sizes (difference ≤ 1)
-        if len(self.left) > len(self.right) + 1:
-            heapq.heappush(self.right, -heapq.heappop(self.left))
-        elif len(self.right) > len(self.left) + 1:
-            heapq.heappush(self.left, -heapq.heappop(self.right))
+        if self.left_heap and self.right_heap and -self.left_heap[0]>self.right_heap[0]:
+            heapq.heappush(self.right_heap,-heapq.heappop(self.left_heap))
+        
+        if len(self.right_heap)>len(self.left_heap)+1:
+            heapq.heappush(self.left_heap,-heapq.heappop(self.right_heap))
+        
+        if len(self.left_heap)>len(self.right_heap)+1:
+            heapq.heappush(self.right_heap,-heapq.heappop(self.left_heap))
 
-        # Step 3: fix ordering if violated
-        if self.left and self.right and -self.left[0] > self.right[0]:
-            l = -heapq.heappop(self.left)
-            r = heapq.heappop(self.right)
-            heapq.heappush(self.left, -r)
-            heapq.heappush(self.right, l)
 
-    def findMedian(self):
-        if len(self.left) == len(self.right):
-            return (-self.left[0] + self.right[0]) / 2.0
-        elif len(self.left) > len(self.right):
-            return float(-self.left[0])
-        else:
-            return float(self.right[0])
+
+        
+
+    def findMedian(self) -> float:
+        if len(self.right_heap)>len(self.left_heap):
+            return float(self.right_heap[0])
+        
+        if len(self.left_heap)>len(self.right_heap):
+            return float(-self.left_heap[0])
+        
+        return (self.right_heap[0]-self.left_heap[0])/2.0
+        
+
+
+# Your MedianFinder object will be instantiated and called as such:
+# obj = MedianFinder()
+# obj.addNum(num)
+# param_2 = obj.findMedian()
