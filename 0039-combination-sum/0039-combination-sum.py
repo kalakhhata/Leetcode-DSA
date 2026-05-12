@@ -1,24 +1,22 @@
-class Solution(object):
-    def combinationSum(self, candidates, target):
-        """
-        :type candidates: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
-        res=[]
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        subset=[]
         ans=[]
-        def findCombination(i,target):
+
+        def findCombination(i,target,subset):
             if i==len(candidates):
                 if target==0:
-                    res.append(ans[:])
+                    ans.append(subset[:])
                 return
-            if candidates[i]<=target:
-                ans.append(candidates[i])
-                findCombination(i,target-candidates[i])
-                ans.pop()
-            findCombination(i+1,target)
-
-
-
-        findCombination(0,target)
-        return res
+            
+            if target>=candidates[i]:
+                subset.append(candidates[i])
+                findCombination(i,target-candidates[i],subset)
+                subset.pop()
+            findCombination(i+1,target,subset)
+        
+        findCombination(0,target,subset)
+        return ans
+                    
+        
