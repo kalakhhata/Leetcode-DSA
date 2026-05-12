@@ -6,26 +6,26 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         res=[]
-        ans=[]
+        comb=[]
         candidates.sort()
-        def findC(idx,target):
-            if target<0:
-                return
+
+        def getCombination(idx,target):
             if target==0:
-                res.append(ans[:])
+                res.append(comb[:])
+                return 
+            
+            if target<0:
                 return
             
             for i in range(idx,len(candidates)):
-                if i>idx and candidates[i]==candidates[i-1]:
+                if i>idx and candidates[i-1]==candidates[i]:
                     continue
+                
                 if target<candidates[i]:
                     break
-                
-                ans.append(candidates[i])
-                findC(i+1,target-candidates[i])
-                ans.pop()
+                comb.append(candidates[i])
+                getCombination(i+1,target-candidates[i])
+                comb.pop()
         
-        findC(0,target)
+        getCombination(0,target)
         return res
-
-        
