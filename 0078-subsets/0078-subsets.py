@@ -1,19 +1,20 @@
-class Solution(object):
-    def subsets(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+
         subset=[]
+        res=[]
+
+        def getSubset(i,subset):
+            if i==len(nums):
+                res.append(subset[:])
+                return
+            
+            subset.append(nums[i])
+            getSubset(i+1,subset)
+            subset.pop()
+            getSubset(i+1,subset)
         
-        for mask in range(1<<len(nums)):
-            ans=[]
-            for i in range(len(nums)):
-                if mask & (1<<i):
-                    ans.append(nums[i])
-            subset.append(ans)
-        
-        return subset
-        
+        getSubset(0,subset)
+        return res
         
         
