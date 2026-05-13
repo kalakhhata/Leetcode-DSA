@@ -1,22 +1,18 @@
-class Solution(object):
-    def subsetsWithDup(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        res=[]
-        ans=[]
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        def getSubset(start):
-          
-            res.append(ans[:])
+        def backtrack(i,curr):
+            if i==len(nums):
+                res.append(curr[:])
+                return
             
-            for i in range(start,len(nums)):
-                if i>start and nums[i]==nums[i-1]:
-                    continue
-                ans.append(nums[i])
-                getSubset(i+1)
-                ans.pop()
-        
-        getSubset(0)
+            curr.append(nums[i])
+            backtrack(i+1,curr)
+            curr.pop()
+
+            while i+1<len(nums) and nums[i]==nums[i+1]:
+                i+=1
+            backtrack(i+1,curr)
+        res=[]
+        backtrack(0,[])
         return res
