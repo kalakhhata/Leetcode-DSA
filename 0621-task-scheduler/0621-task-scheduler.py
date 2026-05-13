@@ -1,28 +1,28 @@
 import heapq
-class Solution(object):
-    def leastInterval(self, tasks, n):
-        """
-        :type tasks: List[str]
-        :type n: int
-        :rtype: int
-        """
-        freq = Counter(tasks)
-        max_heap = [-cnt for cnt in freq.values()]
-        heapq.heapify(max_heap)
+from collections import deque
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        freq=Counter(tasks)
+        maxHeap=[]
+        for key in freq:
+            heapq.heappush(maxHeap,-freq[key])
+        cnt=0
+        q=deque()
+        i=0
 
-        cool_down=deque()
-        time=0
-
-        while max_heap or cool_down:
-            time+=1
-
-            if max_heap:
-                cnt=heapq.heappop(max_heap)+1
-                if cnt!=0:
-                    cool_down.append((cnt,time+n))
+        while maxHeap or q:
             
-            if cool_down and cool_down[0][1]==time:
-                heapq.heappush(max_heap,cool_down.popleft()[0])
-        
-        return time
+            if maxHeap:
+                t=-heapq.heappop(maxHeap)-1
+                if t!=0:
+                    q.append([t,n+i])
+            if q and q[0][1]==i:
+                t1,_=q.popleft()
+                heapq.heappush(maxHeap,-t1)
+            i+=1
+            
+        return i
+
+
+
         
