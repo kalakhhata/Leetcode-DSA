@@ -1,19 +1,20 @@
-class Solution(object):
-    def generateParenthesis(self, n):
-        """
-        :type n: int
-        :rtype: List[str]
-        """
-        res=[]
-        def getParentheses(l,r,st):
-            #base-case
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+
+        def backtrack(l,r,s):
             if l==r==0:
-                res.append(st)
+                res.append(s)
                 return
+            
             if l>0:
-                getParentheses(l-1,r,st+'(')
-            if r>0 and r>l:
-                getParentheses(l,r-1,st+')')
+                backtrack(l-1,r,s+'(')
+            if r>l:
+                backtrack(l,r-1,s+')')
         
-        getParentheses(n,n,'')
+        res=[]
+        backtrack(n,n,'')
         return res
+
+
+
+        
