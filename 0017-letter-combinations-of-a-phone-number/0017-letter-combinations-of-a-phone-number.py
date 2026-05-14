@@ -1,25 +1,26 @@
-class Solution(object):
-    def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
         res=[]
         if len(digits)==0:
             return res
-        pad={'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
-        def getLetter(idx,comb):
+        letters = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz",
+        }
+
+        def backtrack(idx,path):
             if idx==len(digits):
-                res.append(comb[:])
+                res.append(path[:])
                 return
-
-            for letter in pad[digits[idx]]:
-                getLetter(idx+1,comb+letter)
+            
+            for letter in letters[digits[idx]]:
+                backtrack(idx+1,path+letter)
         
-        getLetter(0,'')
-
+        backtrack(0,'')
         return res
-                
-
-
-        
