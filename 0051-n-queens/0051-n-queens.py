@@ -1,31 +1,33 @@
-class Solution(object):
-    def solveNQueens(self, n):
-        """
-        :type n: int
-        :rtype: List[List[str]]
-        """
-
-        def backtrack(r,cols,diag1,diag2,board):
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        
+        
+        
+        
+        
+        def backtrack(r,col,diag1,diag2):
             if r==n:
-                res.append(["".join(row) for row in board])
+                res.append([''.join(row) for row in board])
                 return
             
             for c in range(n):
-                if c in cols or (r+c) in diag1 or (r-c) in diag2:
+                if c in col or (r-c) in diag1 or (r+c) in diag2 or board[r][c]!='.':
                     continue
-                cols.add(c)
-                diag1.add(r+c)
-                diag2.add(r-c)
+                
+                col.add(c)
+                diag1.add(r-c)
+                diag2.add(r+c)
                 board[r][c]='Q'
-                backtrack(r+1,cols,diag1,diag2,board)
+                backtrack(r+1,col,diag1,diag2)
+                col.remove(c)
+                diag1.remove(r-c)
+                diag2.remove(r+c)
                 board[r][c]='.'
-                cols.remove(c)
-                diag1.remove(r+c)
-                diag2.remove(r-c)
-        res=[]
-        board=[['.']*n for _ in range(n)]
-        backtrack(0,set(),set(),set(),board)
-        return res
         
+        board=[['.']*n for _ in range(n)]
+        res=[]
+        backtrack(0,set(),set(),set())
+        return res
+
 
         
