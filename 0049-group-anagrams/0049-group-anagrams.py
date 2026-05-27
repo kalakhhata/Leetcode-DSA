@@ -1,11 +1,15 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        ans=defaultdict(list)
+
+        bucket=defaultdict(list)
+    
         for st in strs:
-            bucket=[0]*26
-            
-            for c in st:
-                bucket[ord(c)-ord('a')]+=1
-            ans[tuple(bucket)].append(st)
+            freq=[0]*26
+
+            for s in st:
+                freq[ord(s)-ord('a')]+=1
+            bucket[tuple(freq)].append(st)
         
-        return list(ans.values())
+        return [bucket[key] for key in bucket]
+
+        
