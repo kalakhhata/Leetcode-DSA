@@ -1,17 +1,15 @@
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        left=0
-        right=len(height)-1
-        maxarea=0
+        k=0
+        l=len(height)-1
+        ans=0
 
-        while left<right:
-            width=right-left
-            maxarea=max(maxarea,min(height[left],height[right])*width)
-            if height[left]<=height[right]:
-                left+=1
+        while k<l:
+            hi=min(height[k],height[l])
+            width=(l-k)
+            ans=max(ans,hi*width)
+            if height[k]<=height[l]:
+                k+=1
             else:
-                right-=1
-        
-        return maxarea
-
-        
+                l-=1
+        return ans
