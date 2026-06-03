@@ -1,17 +1,14 @@
-class Solution(object):
-    def minWindow(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+
+
         dict_t=Counter(t)
         need=len(dict_t)
         have=0
-        max_len=float('inf')
-        res=[-1,-1]
         l=0
         window=defaultdict(int)
+        max_len=float('inf')
+        res=[-1,-1]
 
         for r in range(len(s)):
             c=s[r]
@@ -21,17 +18,17 @@ class Solution(object):
                 have+=1
             
             while have==need:
-                if r-l+1<max_len:
+                if r-l+1 < max_len:
                     max_len=r-l+1
                     res[0]=l
                     res[1]=r
-                
                 window[s[l]]-=1
                 if s[l] in dict_t and window[s[l]]<dict_t[s[l]]:
                     have-=1
                 l+=1
         
         l,r=res
-
         return s[l:r+1] if max_len!=float('inf') else ''
-                
+
+
+        
