@@ -6,7 +6,7 @@ class Solution(object):
         :type speed: List[int]
         :rtype: int
         """
-        cars = sorted(zip(position,speed), reverse=True)
+        cars=sorted(zip(position,speed), reverse=True)
         st=[]
 
         for pos,sp in cars:
@@ -15,5 +15,6 @@ class Solution(object):
 
             if len(st)>=2 and st[-1]<=st[-2]:
                 st.pop()
-        
         return len(st)
+
+        
