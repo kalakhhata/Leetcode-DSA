@@ -1,20 +1,22 @@
 # Definition for singly-linked list.
-# class ListNode:
+# class ListNode(object):
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+class Solution(object):
+    def mergeTwoLists(self, list1, list2):
+        """
+        :type list1: Optional[ListNode]
+        :type list2: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
         ans=ListNode()
         dummy=ans
         l1=list1
         l2=list2
 
-        while l1 or l2:
-            val1=l1.val if l1 else float('inf')
-            val2=l2.val if l2 else float('inf')
-
-            if val1<=val2:
+        while l1 and l2:
+            if l1.val<=l2.val:
                 dummy.next=l1
                 l1=l1.next
             else:
@@ -22,8 +24,5 @@ class Solution:
                 l2=l2.next
             dummy=dummy.next
         
+        dummy.next=l1 or l2
         return ans.next
-        
-
-            
-        
