@@ -1,35 +1,44 @@
-class Node:
+class Node():
     def __init__(self,key,val):
         self.key=key
         self.val=val
+        self.nxt=None
         self.prev=None
-        self.next=None
 
-class LRUCache:
+class LRUCache(object):
 
-    def __init__(self, capacity: int):
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
         self.cap=capacity
         self.cache={}
+
         self.left=Node(0,0)
         self.right=Node(0,0)
-        self.left.next=self.right
+        self.left.nxt=self.right
         self.right.prev=self.left
-    
-    def insert(self,node):
-        prev=self.right.prev
-        next=self.right
-        node.next=next
-        node.prev=prev
-        prev.next=node
-        next.prev=node
+
     
     def remove(self,node):
         prev=node.prev
-        next=node.next
-        prev.next=next
-        next.prev=prev
+        nxt=node.nxt
+        prev.nxt=nxt
+        nxt.prev=prev
+    
+    def insert(self,node):
+        prev=self.right.prev
+        nxt=self.right
+        node.nxt=nxt
+        nxt.prev=node
+        node.prev=prev
+        prev.nxt=node
 
-    def get(self, key: int) -> int:
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
         if key in self.cache:
             self.remove(self.cache[key])
             self.insert(self.cache[key])
@@ -37,20 +46,22 @@ class LRUCache:
         return -1
         
 
-    def put(self, key: int, value: int) -> None:
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: None
+        """
         if key in self.cache:
             self.remove(self.cache[key])
-        
         self.cache[key]=Node(key,value)
         self.insert(self.cache[key])
 
         if len(self.cache)>self.cap:
-            lru=self.left.next
+            lru=self.left.nxt
             self.remove(lru)
             del self.cache[lru.key]
-
         
-
 
 
 # Your LRUCache object will be instantiated and called as such:
