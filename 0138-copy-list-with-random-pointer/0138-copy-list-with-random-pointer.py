@@ -13,11 +13,12 @@ class Solution(object):
         :type head: Node
         :rtype: Node
         """
+        
         curr=head
         while curr:
-            copy=Node(curr.val)
-            copy.next=curr.next
-            curr.next=copy
+            dummy=Node(curr.val)
+            dummy.next=curr.next
+            curr.next=dummy
             curr=curr.next.next
         
         curr=head
@@ -29,15 +30,12 @@ class Solution(object):
             curr=curr.next.next
         
         curr=head
-        N=Node(-1)
-        newN=N
+        n=Node(-1)
+        dummy=n
         while curr:
-            newN.next=curr.next
-            newN=newN.next
-            curr.next=newN.next
+            dummy.next=curr.next
+            dummy=dummy.next
+            curr.next=dummy.next
             curr=curr.next
-        return N.next
+        return n.next
 
-
-
-        
