@@ -12,7 +12,7 @@ class TimeMap(object):
         :rtype: None
         """
         self.bucket[key].append((value,timestamp))
-        return None
+        return
         
 
     def get(self, key, timestamp):
@@ -29,14 +29,14 @@ class TimeMap(object):
             r=len(self.bucket[key])-1
             while l<=r:
                 mid=l+(r-l)//2
-               
+
                 if self.bucket[key][mid][1]>timestamp:
                     r=mid-1
                 else:
                     res=self.bucket[key][mid][0]
                     l=mid+1
-    
         return res
+
 
 
 # Your TimeMap object will be instantiated and called as such:
