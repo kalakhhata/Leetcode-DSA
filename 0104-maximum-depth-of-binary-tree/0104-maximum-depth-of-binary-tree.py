@@ -13,7 +13,14 @@ class Solution(object):
         if not root:
             return 0
         
-        cnt1=self.maxDepth(root.left)
-        cnt2=self.maxDepth(root.right)
-
-        return max(cnt1,cnt2)+1
+        q=deque([root])
+        depth=0
+        while q:
+            depth+=1
+            for _ in range(len(q)):
+                node=q.popleft()
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+        return depth
