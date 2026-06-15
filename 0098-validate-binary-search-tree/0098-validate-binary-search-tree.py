@@ -8,19 +8,19 @@ class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
 
         st=[]
-        curr=root
         prev=None
-        while curr or st:
-            while curr:
-                st.append(curr)
-                curr=curr.left
+        while st or root:
+            while root:
+                st.append(root)
+                root=root.left
             
-            curr=st.pop()
-            if prev!=None and prev>=curr.val:
+            root=st.pop()
+            if prev!=None and prev>=root.val:
                 return False
-            prev=curr.val
-            curr=curr.right
+            
+            prev=root.val
+            root=root.right
+        
         return True
-
-
+        
         
