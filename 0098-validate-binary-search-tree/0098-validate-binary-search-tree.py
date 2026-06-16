@@ -6,9 +6,12 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-
+        if not root:
+            return True
+        
         st=[]
         prev=None
+
         while st or root:
             while root:
                 st.append(root)
@@ -17,10 +20,8 @@ class Solution:
             root=st.pop()
             if prev!=None and prev>=root.val:
                 return False
-            
             prev=root.val
             root=root.right
-        
         return True
-        
+
         
