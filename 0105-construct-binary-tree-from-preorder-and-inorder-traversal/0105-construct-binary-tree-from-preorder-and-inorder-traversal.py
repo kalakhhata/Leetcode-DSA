@@ -13,13 +13,12 @@ class Solution:
 
         def build(start,end):
             if start>end:
-                return None
-            
+                return
             root=TreeNode(preorder.popleft())
             mid=hm[root.val]
             root.left=build(start,mid-1)
             root.right=build(mid+1,end)
             return root
-        return build(0,len(preorder)-1)
         
+        return build(0,len(preorder)-1)
         
