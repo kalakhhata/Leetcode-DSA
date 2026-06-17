@@ -2,21 +2,20 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
 
         subset=[]
-        ans=[]
+        res=[]
 
-        def findCombination(i,target,subset):
+        def getSubset(i,target,subset):
             if i==len(candidates):
                 if target==0:
-                    ans.append(subset[:])
+                    res.append(subset[:])
                 return
             
             if target>=candidates[i]:
                 subset.append(candidates[i])
-                findCombination(i,target-candidates[i],subset)
+                getSubset(i,target-candidates[i],subset)
                 subset.pop()
-            findCombination(i+1,target,subset)
+            getSubset(i+1,target,subset)
         
-        findCombination(0,target,subset)
-        return ans
-                    
+        getSubset(0,target,subset)
+        return res
         
