@@ -9,16 +9,19 @@ class Solution:
         hm={}
         for i in range(len(inorder)):
             hm[inorder[i]]=i
-        preorder=collections.deque(preorder)
-
+        q=collections.deque(preorder)
         def build(start,end):
             if start>end:
-                return
-            root=TreeNode(preorder.popleft())
-            mid=hm[root.val]
-            root.left=build(start,mid-1)
-            root.right=build(mid+1,end)
-            return root
+                return None
+            
+            val=q.popleft()
+            node=TreeNode(val)
+            mid=hm[val]
+            node.left=build(start,mid-1)
+            node.right=build(mid+1,end)
+            return node
         
-        return build(0,len(preorder)-1)
+        return build(0,len(inorder)-1)
+
+
         
