@@ -16,7 +16,7 @@ class Solution:
             if not node:
                 return False
 
-            if isValid(node,subRoot):
+            if node.val==subRoot.val and isValid(node,subRoot):
                 return True
             
             return checkNode(node.left) or checkNode(node.right)
