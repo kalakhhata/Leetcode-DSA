@@ -9,10 +9,10 @@ class Solution(object):
         comb=[]
         candidates.sort()
 
-        def getCombination(idx,target):
+        def getComb(idx,comb,target):
             if target==0:
                 res.append(comb[:])
-                return 
+                return
             
             if target<0:
                 return
@@ -23,9 +23,10 @@ class Solution(object):
                 
                 if target<candidates[i]:
                     break
+                
                 comb.append(candidates[i])
-                getCombination(i+1,target-candidates[i])
+                getComb(i+1,comb,target-candidates[i])
                 comb.pop()
         
-        getCombination(0,target)
+        getComb(0,comb,target)
         return res
