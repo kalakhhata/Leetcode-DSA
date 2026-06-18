@@ -8,20 +8,19 @@ class Solution:
     def goodNodes(self, root: TreeNode) -> int:
 
         cnt=0
-        maxVal=float('-inf')
-        def cntNodes(node,maxVal):
+        max_val=float('-inf')
+
+        def dfs(node,max_val):
             nonlocal cnt
             if not node:
                 return
-            maxVal=max(maxVal,node.val)
-            if node.val>=maxVal:
+            
+            if node.val>=max_val:
                 cnt+=1
-            cntNodes(node.left,maxVal)
-            cntNodes(node.right,maxVal)
+                max_val=max(max_val,node.val)
+            dfs(node.left,max_val)
+            dfs(node.right,max_val)
         
-        cntNodes(root,maxVal)
-        
+        dfs(root,max_val)
         return cnt
-
-
         
