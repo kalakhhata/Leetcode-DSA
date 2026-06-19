@@ -2,9 +2,11 @@ import heapq
 class Twitter:
 
     def __init__(self):
+        self.following=defaultdict(set)
         self.tweet=defaultdict(list)
-        self.followi=defaultdict(set)
         self.time=0
+
+
         
 
     def postTweet(self, userId: int, tweetId: int) -> None:
@@ -13,38 +15,34 @@ class Twitter:
         
 
     def getNewsFeed(self, userId: int) -> List[int]:
-
-        max_heap=[]
         res=[]
-        users = self.followi[userId] | {userId}
+        maxHeap=[]
+        users= self.following[userId] | {userId}
 
         for u in users:
             if self.tweet[u]:
                 idx=len(self.tweet[u])-1
-                time,tId=self.tweet[u][idx]
-                heapq.heappush(max_heap,(-time,idx,u,tId))
+                t,tid=self.tweet[u][idx]
+                heapq.heappush(maxHeap,(-t,tid,idx,u))
         
-        while max_heap and len(res)<10:
-            t,idx,u,tId=heapq.heappop(max_heap)
-            res.append(tId)
-            if idx-1 >= 0:
+        while maxHeap and len(res)<10:
+            t,tid,idx,u=heapq.heappop(maxHeap)
+            res.append(tid)
+            if idx-1>=0:
                 idx=idx-1
-                t,tId=self.tweet[u][idx]
-                heapq.heappush(max_heap,(-t,idx,u,tId))
-        
+                t,tid=self.tweet[u][idx]
+                heapq.heappush(maxHeap,(-t,tid,idx,u))
         return res
+        
 
         
 
     def follow(self, followerId: int, followeeId: int) -> None:
-        self.followi[followerId].add(followeeId)
-
-
+        self.following[followerId].add(followeeId)
         
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
-        self.followi[followerId].discard(followeeId)
-
+        self.following[followerId].discard(followeeId)
         
 
 
