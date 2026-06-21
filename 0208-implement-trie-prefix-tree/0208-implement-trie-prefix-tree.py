@@ -10,27 +10,31 @@ class Trie:
 
     def insert(self, word: str) -> None:
         curr=self.root
+
         for ch in word:
             idx=ord(ch)-ord('a')
             if curr.children[idx] is None:
                 curr.children[idx]=TrieNode()
             curr=curr.children[idx]
         curr.end=True
-
+            
         
 
     def search(self, word: str) -> bool:
         curr=self.root
+
         for ch in word:
             idx=ord(ch)-ord('a')
             if curr.children[idx] is None:
                 return False
             curr=curr.children[idx]
         return curr.end
+                
         
 
     def startsWith(self, prefix: str) -> bool:
         curr=self.root
+        
         for ch in prefix:
             idx=ord(ch)-ord('a')
             if curr.children[idx] is None:
