@@ -12,12 +12,10 @@ class Solution:
             
             board[i][j]='-1'
             dfs(i+1,j)
-            dfs(i,j+1)
             dfs(i-1,j)
+            dfs(i,j+1)
             dfs(i,j-1)
-            
-
-
+        
         for i in range(r):
             if board[i][0]=='O':
                 dfs(i,0)
@@ -29,12 +27,11 @@ class Solution:
                 dfs(0,j)
             if board[r-1][j]=='O':
                 dfs(r-1,j)
+        
         for i in range(r):
             for j in range(c):
                 if board[i][j]=='O':
                     board[i][j]='X'
                 elif board[i][j]=='-1':
                     board[i][j]='O'
-
-        
         
