@@ -1,26 +1,25 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        visited=[False]*numCourses
         path=[False]*numCourses
-        adj=[[] for _ in range(numCourses)]
-        indeg=[0]*numCourses
+        visited=[False]*numCourses
+        adj=[[] for i in range(numCourses)]
         for u,v in prerequisites:
             adj[u].append(v)
-            indeg[u]+=1
         
-        def dfs(c):
-            visited[c]=True
-            path[c]=True
+        def dfs(n):
+            visited[n]=True
+            path[n]=True
 
-            for neighbour in adj[c]:
-                if not visited[neighbour]:
-                    if not dfs(neighbour):
+            for ne in adj[n]:
+                if not visited[ne]:
+                    if not dfs(ne):
                         return False
-                elif path[neighbour]:
+                elif path[ne]:
                     return False
-            
-            path[c]=False
+            path[n]=False
             return True
+
+        
         
         for node in range(numCourses):
             if not visited[node]:
@@ -28,19 +27,4 @@ class Solution:
                     return False
         
         return True
-               
-        
-        
-
-
-
-
-
-        for c in range(numCourses):
-            if not visited[c]:
-                if not dfs(c,-1):
-                    return False
-        
-        return True
-
         
