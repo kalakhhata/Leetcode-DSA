@@ -1,43 +1,32 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        st=[]
-        adj=[[] for _ in range(numCourses)]
-        visited=[False]*numCourses
         path=[False]*numCourses
+        visited=[False]*numCourses
+        adj=[[] for _ in range(numCourses)]
         for u,v in prerequisites:
             adj[u].append(v)
-        
-        def dfs(node):
-            visited[node]=True
-            path[node]=True
+        st=[]
 
-            for ne in adj[node]:
+        def dfs(n):
+            visited[n]=True
+            path[n]=True
+
+            for ne in adj[n]:
                 if not visited[ne]:
                     if dfs(ne):
                         return True
                 elif path[ne]:
                     return True
-                
-
-            path[node]=False
-            st.append(node)
+            
+            path[n]=False
+            st.append(n)
             return False
         
-
-
 
         for node in range(numCourses):
             if not visited[node]:
                 if dfs(node):
                     return []
-                
         
         return st
-
-
-
-
-
-
-        
         
