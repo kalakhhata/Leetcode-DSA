@@ -2,7 +2,7 @@ class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         wordSet=set(wordList)
         q=deque()
-        q.append((beginWord,1))
+        q.append([beginWord,1])
 
         while q:
             word,level=q.popleft()
@@ -16,7 +16,7 @@ class Solution:
 
                     if newWord in wordSet:
                         wordSet.remove(newWord)
-                        q.append((newWord,level+1))
+                        q.append([newWord,level+1])
         
         return 0
         
