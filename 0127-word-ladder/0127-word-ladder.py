@@ -6,12 +6,11 @@ class Solution:
 
         while q:
             word,level=q.popleft()
-            
             if word==endWord:
                 return level
-            
+
             for i in range(len(word)):
-                for c in 'abcdefghijklmnopqrstuvwxyz':
+                for c in 'abcdefghijklmonpqrstuvwxyz':
                     newWord=word[:i]+c+word[i+1:]
 
                     if newWord in wordSet:
@@ -19,4 +18,5 @@ class Solution:
                         q.append([newWord,level+1])
         
         return 0
+
         
