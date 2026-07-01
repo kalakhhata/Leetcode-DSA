@@ -3,30 +3,29 @@ class Solution:
         if len(edges)!=n-1:
             return False
         
-        #To be a Valid Tree
-        #1. It has to be undirected and there must be no loop
-        #2. num of edges must be (n-1) where n is number of nodes
-
-        visited=[False]*n
         adj=[[] for _ in range(n)]
         for u,v in edges:
             adj[u].append(v)
             adj[v].append(u)
+        visited=[False]*n
         
-        
-        def dfs(n,parent):
-            visited[n]=True
+        def dfs(node,parent):
             
-            for ne in adj[n]:
+            visited[node]=True
+
+            for ne in adj[node]:
                 if not visited[ne]:
-                    if not dfs(ne,n):
+                    if not dfs(ne,node):
                         return False
                 elif ne!=parent:
                     return False
-            
             return True
+        
         if not dfs(0,-1):
             return False
         
         return all(visited)
+                    
+            
+        
         
