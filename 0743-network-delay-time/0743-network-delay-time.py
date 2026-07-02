@@ -1,33 +1,32 @@
 import heapq
-from collections import defaultdict
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        
+
+        minH=[]
+        minH.append((0,k))
+        visited=[False]*n
         adj=defaultdict(list)
-        minHeap=[]
+        for u,v,d in times:
+            adj[u].append([v,d])
 
-        for no,d,w in times:
-            adj[no].append((d,w))
-        
-        minHeap.append((0,k))
-        visited=set()
         ans=0
+        while minH:
+            dist,node=heapq.heappop(minH)
 
-        while minHeap:
-            dist,node=heapq.heappop(minHeap)
-
-            if node in visited:
+            if visited[node-1]:
                 continue
-            visited.add(node)
-            ans=max(ans,dist)
-
-            for ne,weight in adj[node]:
-                if ne not in visited:
-                    heapq.heappush(minHeap,(weight+dist,ne))
+            visited[node-1]=True
+            ans=max(dist,ans)
+            for ne,d in adj[node]:
+                if not visited[ne-1]:
+                    heapq.heappush(minH,(dist+d,ne))
         
-        return ans if len(visited)==n else -1
+        return ans if all(visited) else -1
+            
+            
+            
 
-        
+
 
 
         
