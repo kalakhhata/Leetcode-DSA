@@ -1,17 +1,9 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        ans=[0]*(n+1)
+        dp=[0]*(n+1)
         
         for i in range(1,n+1):
-            bit=0
-            el=i
-            while el:
-                bit+=1
-                el=el&(el-1)
-            ans[i]=bit
-        return ans
-
-                
-
+            dp[i]=dp[i>>1]+(i&1)
+        return dp
 
         
