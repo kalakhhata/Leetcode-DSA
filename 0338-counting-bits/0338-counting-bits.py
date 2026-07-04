@@ -6,9 +6,9 @@ class Solution:
             bit=0
             el=i
             while el:
-                bit+=el&1
-                el=el>>1
-                ans[i]=bit
+                bit+=1
+                el=el&(el-1)
+            ans[i]=bit
         return ans
 
                 
