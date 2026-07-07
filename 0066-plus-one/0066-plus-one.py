@@ -1,18 +1,16 @@
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
         
-        rev=digits[::-1]
-        carry=1
-        i=0
+        i=len(digits)-1
 
-        while i<len(digits) and carry!=0:
-            if rev[i]<9:
-                rev[i]+=1
-                return rev[::-1]
-            rev[i]=0
-            i+=1
-        rev.append(1)
-        return rev[::-1]
+        while i>=0:
+            if digits[i]<9:
+                digits[i]+=1
+                return digits
+            digits[i]=0
+            i-=1
+        
+        return [1]+digits
             
 
 
