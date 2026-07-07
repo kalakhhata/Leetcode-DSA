@@ -1,16 +1,16 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
 
-        seen=set()
+        
+        slow=self.sumOf(n)
+        fast=self.sumOf(self.sumOf(n))
         
 
-        while n not in seen:
-            seen.add(n)
-            n=self.sumOf(n)
-            if n==1:
-                return True
+        while fast!=1 and fast!=slow:
+            slow=self.sumOf(slow)
+            fast=self.sumOf(self.sumOf(fast))
         
-        return False
+        return fast==1
     
     def sumOf(self,n):
         total=0
