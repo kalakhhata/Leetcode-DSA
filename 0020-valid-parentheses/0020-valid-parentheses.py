@@ -1,19 +1,18 @@
-class Solution(object):
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        stack=[]
-        mapping={')':'(','}':'{',']':'['}
-        for c in s:
-            if c in mapping.values():
-                stack.append(c)
-            elif not stack or mapping[c]!=stack.pop():
-                return False
+class Solution:
+    def isValid(self, s: str) -> bool:
         
-        return not stack
+        st=[]
+        bucket={')':'(',']':'[','}':'{'}
+        cnt=0
+        for p in s:
+            if p in bucket:
+                cnt-=1
+                if not st or st.pop()!=bucket[p]:
+                    return False
+            else:
+                st.append(p)
+                cnt+=1
+        return cnt==0
             
-
         
         
