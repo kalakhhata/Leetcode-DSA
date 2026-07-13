@@ -1,21 +1,17 @@
-class Solution(object):
-    def subarraySum(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        bucket=defaultdict(int)
+        bucket={0:1}
+        total=0
         cnt=0
-        s=0
-
-        prev=defaultdict(int)
-        prev[0]=1
-
         for num in nums:
-            s+=num
-            rem=s-k
-            if rem in prev:
-                cnt+=prev[rem]
-            prev[s]+=1
+            total+=num
+            
+            rem=total-k
+            if rem in bucket:
+                cnt+=bucket[rem]
+            bucket[total]=bucket.get(total,0)+1
         return cnt
 
+        
+        
