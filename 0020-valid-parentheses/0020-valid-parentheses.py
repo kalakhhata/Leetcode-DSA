@@ -1,18 +1,12 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        
+        hm={')':'(',']':'[','}':'{'}
         st=[]
-        bucket={')':'(',']':'[','}':'{'}
-        cnt=0
-        for p in s:
-            if p in bucket:
-                cnt-=1
-                if not st or st.pop()!=bucket[p]:
-                    return False
-            else:
-                st.append(p)
-                cnt+=1
-        return cnt==0
-            
-        
+
+        for c in s:
+            if c in hm.values():
+                st.append(c)
+            elif not st or st.pop()!=hm[c]:
+                return False
+        return not st
         
