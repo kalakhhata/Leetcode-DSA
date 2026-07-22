@@ -5,8 +5,14 @@ class MyQueue:
         
 
     def push(self, x: int) -> None:
+        temp=[]
+
+        while self.st:
+            temp.append(self.st.pop())
         self.st.append(x)
-        self.st=self.st[::-1]
+
+        while temp:
+            self.st.append(temp.pop())
 
         
 
