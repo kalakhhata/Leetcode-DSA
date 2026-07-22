@@ -1,15 +1,15 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
 
-        abs_list = list(map(lambda n: abs(n - x), arr))
-        abs_sum_min = abs_sum = sum(abs_list[0:k])
-        min_i = 0
+        dis_list=[abs(n-x) for n in arr]
+        mini=minsum=sum(dis_list[:k])
+        idx=0
 
-        for i in range(1, len(arr) - k + 1):
-            abs_sum = abs_list[i + k - 1] + abs_sum - abs_list[i - 1]
-
-            if abs_sum < abs_sum_min:
-                abs_sum_min = abs_sum
-                min_i = i
-
-        return arr[min_i:min_i + k]
+        for i in range(1,len(arr)-k+1):
+            minsum=minsum+arr[i+k-1]-arr[i-1]
+            if minsum<mini:
+                mini=minsum
+                idx=i
+        
+        return arr[idx:idx+k]
+        
