@@ -6,7 +6,7 @@ class Solution:
         idx=0
 
         for i in range(1,len(arr)-k+1):
-            minsum=minsum+arr[i+k-1]-arr[i-1]
+            minsum=minsum+dis_list[i+k-1]-dis_list[i-1]
             if minsum<mini:
                 mini=minsum
                 idx=i
