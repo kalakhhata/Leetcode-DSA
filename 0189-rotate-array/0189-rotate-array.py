@@ -3,13 +3,7 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        #k%=len(nums)
-        temp=[0]*len(nums)
-        for i in range(len(nums)):
-            temp[(i+k)%len(nums)]=nums[i]
-        
-        nums[:]=temp
-
-        
-        
-        
+        k=k%len(nums)
+        nums.reverse()
+        nums[:k]=nums[:k][::-1]
+        nums[k:]=nums[k:][::-1]
