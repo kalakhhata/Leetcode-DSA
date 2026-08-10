@@ -1,18 +1,21 @@
 class Solution:
     def calPoints(self, operations: List[str]) -> int:
         st=[]
-        for c in operations:
-            if c=='+':
-                el=st[-1]+st[-2]
-                st.append(el)
-            elif c=='C':
-                st.pop()
-            elif c=='D':
-                el=2*st[-1]
-                st.append(el)
-            else:
-                st.append(int(c))
-                
-        return sum(st)
 
+        for ops in operations:
+            if ops=='C':
+                if st:
+                    st.pop()
+            elif ops=='D':
+                if st:
+                    el=st[-1]
+                    st.append(el*2)
+            elif ops=='+':
+                el1=st[-1]
+                el2=st[-2]
+                st.append(el1+el2)
+            else:
+                st.append(int(ops))
+        
+        return sum(st)
         
