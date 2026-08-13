@@ -2,7 +2,6 @@ class StockSpanner:
 
     def __init__(self):
         self.st=[]
-
         
 
     def next(self, price: int) -> int:
