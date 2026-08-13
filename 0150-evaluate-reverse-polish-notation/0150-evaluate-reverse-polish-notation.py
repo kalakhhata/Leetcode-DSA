@@ -5,7 +5,7 @@ class Solution:
             '+':lambda a,b:a+b,
             '-':lambda a,b:a-b,
             '*':lambda a,b:a*b,
-            '/':lambda a,b:int(a/b) if a*b>0 else - (abs(a)//abs(b))
+            '/':lambda a,b:int(a/b)
         }
 
         for token in tokens:
