@@ -14,16 +14,17 @@ class Codec:
         :rtype: str
         """
         res=[]
-        def preorder(node):
-            if not node:
+
+        def build(root):
+            if not root:
                 res.append('N')
                 return
             
-            res.append(str(node.val))
-            preorder(node.left)
-            preorder(node.right)
+            res.append(str(root.val))
+            build(root.left)
+            build(root.right)
         
-        preorder(root)
+        build(root)
         return ','.join(res)
 
         
@@ -34,23 +35,25 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        nodeVal=data.split(',')
+
         self.i=0
+        nodeVal=data.split(',')
 
         def construct():
             val=nodeVal[self.i]
-            
             self.i+=1
+
             if val=='N':
                 return None
             
-           
-            root=TreeNode(int(val))
-            root.left=construct()
-            root.right=construct()
-            return root
+            node=TreeNode(int(val))
+            node.left=construct()
+            node.right=construct()
+            return node
         
         return construct()
+
+        
 
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
