@@ -38,10 +38,10 @@ class Codec:
 
         self.i=0
         nodeVal=data.split(',')
+        q=deque(nodeVal)
 
         def construct():
-            val=nodeVal[self.i]
-            self.i+=1
+            val=q.popleft()
 
             if val=='N':
                 return None
