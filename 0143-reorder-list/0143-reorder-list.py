@@ -1,39 +1,38 @@
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution:
-    def reorderList(self, head: Optional[ListNode]) -> None:
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        #find the middle element
-        slow=head
-        fast=head
-        while fast and fast.next:
-            slow=slow.next
-            fast=fast.next.next
-        
-        #half reverse the list
-        prev=None
-        curr=slow
-        while curr:
-            nxt=curr.next
-            curr.next=prev
-            prev=curr
-            curr=nxt
-        
-        #merge the linkedlist as required
-        left=head
-        right=prev
-        while right.next:
-            tmp=left.next
-            left.next=right
-            left=tmp
+class Solution(object):
+    def reorderList(self, head):
+        if not head or not head.next:
+            return
 
-            tmp=right.next
-            right.next=left
-            right=tmp
-            
-        
+        # 1. Find middle
+        slow = head
+        fast = head
+
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        # 2. Reverse second half
+        curr = slow.next
+        slow.next = None
+
+        prev = None
+
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+
+        # 3. Merge two halves
+        first = head
+        second = prev
+
+        while first and second:
+            nxt1 = first.next
+            nxt2 = second.next
+
+            first.next = second
+            second.next = nxt1
+
+            first = nxt1
+            second = nxt2
