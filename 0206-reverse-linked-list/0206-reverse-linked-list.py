@@ -11,10 +11,9 @@ class Solution(object):
         """
         if not head or not head.next:
             return head
-        
-        newHead=self.reverseList(head.next)
-
+        ans=self.reverseList(head.next)
         head.next.next=head
         head.next=None
 
-        return newHead
+
+        return ans
