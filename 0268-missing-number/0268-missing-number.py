@@ -1,12 +1,14 @@
-class Solution:
-    def missingNumber(self, nums: List[int]) -> int:
-        start=1
-        temp=0
-        real=0
-        for i in range(len(nums)):
-            temp+=start
-            start+=1
-            real+=nums[i]
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        op=0
+        for i in range(1,len(nums)+1):
+            op^=i
+            op^=nums[i-1]
+        return op
+
         
-        return temp-real
         
