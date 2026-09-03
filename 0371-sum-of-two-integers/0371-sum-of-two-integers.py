@@ -1,12 +1,13 @@
-class Solution:
-    def getSum(self, a: int, b: int) -> int:
-        mask = 0xFFFFFFFF
-        maxInt=2**31 -1
+class Solution(object):
+    def getSum(self, a, b):
+        """
+        :type a: int
+        :type b: int
+        :rtype: int
+        """
+        mask=0xffffffff
 
-        while b!=0:
-            s=(a^b) & mask
-            carry= (a&b) & mask
-            a=s
-            b=carry<<1
+        while b&mask>0:
+            a,b=a^b,(a&b)<<1
         
-        return a if a<=maxInt else ~(a^mask)
+        return (mask&a) if b>0 else a
