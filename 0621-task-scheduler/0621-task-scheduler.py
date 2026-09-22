@@ -1,23 +1,36 @@
-import heapq
-from collections import deque
 class Solution:
-    def leastInterval(self, tasks: List[str], n: int) -> int:
-        freq=Counter(tasks)
-        max_heap=[]
-        for key in freq:
-            heapq.heappush(max_heap,-freq[key])
-        q=deque()
-        i=0
+    def leastInterval(self, tasks: list[str], n: int) -> int:
 
-        while max_heap or q:
-            if max_heap:
-                t=-heapq.heappop(max_heap)-1
-                if t!=0:
-                    q.append([-t,i+n])
+        freq=Counter(tasks)
+        heap=[]
+        for key in freq:
+            heapq.heappush(heap,-freq[key])
+        q=deque()
+        ans=0
+
+        while heap or q:
+            if len(heap)>0:
+                cnt=-heapq.heappop(heap)
+                cnt-=1
+                if cnt>0:
+                    q.append((cnt,ans+n))
             
-            if q and q[0][1]==i:
-                rt,_=q.popleft()
-                heapq.heappush(max_heap,rt)
-            i+=1
-        return i
+            
+
+
+
+            if len(q)>0 and q[0][1]==ans:
+                cnt,ans=q.popleft()
+                heapq.heappush(heap,-cnt)
+            ans+=1
+        return ans
+
+            
+
+
+
+
+
+
+
         
