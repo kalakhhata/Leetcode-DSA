@@ -10,8 +10,6 @@ class Solution:
 
             if s2<s1:
                 heapq.heappush(self.heap,-(s1-s2))
-            else:
-                continue
         return -self.heap[0] if self.heap else 0
 
 
