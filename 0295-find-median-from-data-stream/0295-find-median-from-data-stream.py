@@ -9,17 +9,14 @@ class MedianFinder:
     def addNum(self, num: int) -> None:
         heapq.heappush(self.left,-num)
 
-        if self.right and -self.left[0]>self.right[0]:
+        if self.right and self.right[0]<-self.left[0]:
             heapq.heappush(self.right,-heapq.heappop(self.left))
-
-
+        
         if len(self.right)+1<len(self.left):
             heapq.heappush(self.right,-heapq.heappop(self.left))
         
-        if len(self.left)+1<len(self.right)+1:
+        if len(self.left)+1<len(self.right):
             heapq.heappush(self.left,-heapq.heappop(self.right))
-        
-
 
 
         
@@ -28,10 +25,9 @@ class MedianFinder:
         if len(self.left)==len(self.right):
             return (self.right[0]-self.left[0])/2
         elif len(self.left)>len(self.right):
-            return -float(self.left[0])
+            return -self.left[0]
         else:
-            return float(self.right[0])
-        
+            return self.right[0]
         
 
 
