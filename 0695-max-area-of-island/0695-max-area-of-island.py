@@ -2,15 +2,14 @@ class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
 
 
-        visited=set()
+       
         max_area=0
         def dfs(r,c,grid):
-            if r<0 or c<0 or r>=len(grid) or c>=len(grid[0]) or grid[r][c]!=1 or (r,c) in visited:
+            if r<0 or c<0 or r>=len(grid) or c>=len(grid[0]) or grid[r][c]!=1:
                 return 0
             
             
-            grid[r][c]=-1
-            visited.add((r,c))
+            grid[r][c]=0
             return 1+(
             dfs(r+1,c,grid)+
             dfs(r-1,c,grid)+
