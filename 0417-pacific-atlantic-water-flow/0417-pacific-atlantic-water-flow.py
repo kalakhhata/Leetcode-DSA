@@ -1,40 +1,38 @@
 class Solution:
-    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+    def pacificAtlantic(self, heights: list[list[int]]) -> list[list[int]]:
 
-        row=len(heights)
-        col=len(heights[0])
 
-        pq=deque()
+        n=len(heights)
+        m=len(heights[0])
         pse=set()
-        aq=deque()
         ase=set()
+        po=deque()
+        ao=deque()
 
-        for i in range(row):
-            pq.append([i,0])
+        for i in range(n):
             pse.add((i,0))
-            aq.append([i,col-1])
-            ase.add((i,col-1))
+            ase.add((i,m-1))
+            po.append([i,0])
+            ao.append((i,m-1))
         
-        for j in range(col):
-            pq.append([0,j])
+        for j in range(m):
             pse.add((0,j))
-            aq.append([row-1,j])
-            ase.add((row-1,j))
-        
-        def bfs(q,seen):
+            ase.add((n-1,j))
+            po.append([0,j])
+            ao.append([n-1,j])
+
+        def dfs(q,seen):
             while q:
                 i,j=q.popleft()
-                for ioff,joff in [(1,0),(-1,0),(0,1),(0,-1)]:
-                    r,c=i+ioff,j+joff
-                    if 0<=r<row and 0<=c<col and (r,c) not in seen and heights[r][c]>=heights[i][j]:
+                for i_off,j_off in [(0,1),(1,0),(-1,0),(0,-1)]:
+                    r,c=i+i_off,j+j_off
+                    if 0<=r<n and 0<=c<m and (r,c) not in seen and heights[r][c]>=heights[i][j]:
                         q.append([r,c])
                         seen.add((r,c))
         
-        bfs(pq,pse)
-        bfs(aq,ase)
+        dfs(po,pse)
+        dfs(ao,ase)
 
         return list(pse.intersection(ase))
-
-
 
         
